@@ -1,8 +1,18 @@
-package client;
-
-import java.io.*;
 import java.net.*;
+import java.io.*;
 
 public class VPNClient {
-    private static final String SERVER_ADDRESS = "127.0.0.1";
+    public static void main(String args[]) throws IOException {
+        Socket s = new Socket("localhost", 4999);
+
+        PrintWriter pr = new PrintWriter(s.getOutputStream());
+        pr.println("Is it working?");
+        pr.flush();
+
+        InputStreamReader in = new InputStreamReader(s.getInputStream());
+        BufferedReader bf = new BufferedReader(in);
+
+        String str = bf.readLine();
+        System.out.println("Server: " + str);
+    }
 }
